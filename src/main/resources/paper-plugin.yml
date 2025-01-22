@@ -1,0 +1,15 @@
+name: ExampleMod
+version: '1.0-SNAPSHOT'
+main: de.cjdev.examplemod.ExampleMod
+api-version: '1.21'
+load: STARTUP
+authors: [ CJDev ]
+description: An Example Mod Plugin
+website: https://modrinth.com/project/paper-mod-api
+dependencies:
+  server:
+    PaperModAPI:
+      load: BEFORE
+      required: true
+    DynamicRP:
+      required: true
