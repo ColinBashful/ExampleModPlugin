@@ -3,10 +3,7 @@ package de.cjdev.examplemod;
 import de.cjdev.examplemod.init.ItemGroupInit;
 import de.cjdev.examplemod.init.ItemInit;
 import de.cjdev.examplemod.init.RecipeInit;
-import de.cjdev.examplemod.listener.FuelRegistryEventListener;
 import de.cjdev.papermodapi.PaperModAPI;
-import net.kyori.adventure.text.Component;
-import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -24,11 +21,6 @@ public final class ExampleMod extends JavaPlugin {
 
         // Registering Fuels
         PaperModAPI.registerFuel(ItemInit.EXAMPLE_FUEL, 20);
-        Integer fuelTicks = PaperModAPI.FuelItems.get(ItemInit.EXAMPLE_FUEL);
-        if (fuelTicks != null)
-            Bukkit.getServer().broadcast(Component.text(fuelTicks));
-
-        Bukkit.getPluginManager().registerEvents(new FuelRegistryEventListener(), this);
     }
 
     @Override
