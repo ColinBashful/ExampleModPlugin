@@ -10,6 +10,7 @@ public class ItemGroupInit {
                 .icon(() -> ItemInit.EXAMPLE_CUSTOM.getDisplayStack())
                 .entries((hasOp, entries) -> {
                     entries.add(ItemInit.EXAMPLE_ITEM);
+                    entries.add(ItemInit.EXAMPLE_TOOL);
                     entries.add(ItemInit.EXAMPLE_FUEL);
                     entries.add(ItemInit.EXAMPLE_EATING);
                     entries.add(ItemInit.EXAMPLE_CUSTOM);

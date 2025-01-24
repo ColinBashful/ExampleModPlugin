@@ -20,6 +20,8 @@ public final class ExampleMod extends JavaPlugin {
         RecipeInit.load();
 
         // Registering Fuels
+
+        // The item can be any material, but it works best when using a real fuel as the base.
         PaperModAPI.registerFuel(ItemInit.EXAMPLE_FUEL, 20);
     }
 
