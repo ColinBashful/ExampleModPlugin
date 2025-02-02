@@ -2,7 +2,8 @@ package de.cjdev.examplemod.init;
 
 import de.cjdev.examplemod.ExampleMod;
 import de.cjdev.papermodapi.PaperModAPI;
-import de.cjdev.papermodapi.api.recipe.CustomShapelessRecipe;
+import de.cjdev.recipeapi.RecipeAPI;
+import de.cjdev.recipeapi.api.recipe.*;
 import net.minecraft.world.item.ItemStack;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -17,10 +18,11 @@ public class RecipeInit {
         });
 
         CustomShapelessRecipe shapelessRecipe = new CustomShapelessRecipe(ItemInit.EXAMPLE_CUSTOM);
-        shapelessRecipe.addIngredient(3, ItemInit.EXAMPLE_ITEM);
+        shapelessRecipe.addIngredient(3, ItemInit.EXAMPLE_FUEL);
         shapelessRecipe.addIngredient(2, Material.DIRT);
-        PaperModAPI.addRecipe(NamespacedKey.fromString("test", ExampleMod.getPlugin()), shapelessRecipe);
+        RecipeAPI.addRecipe(NamespacedKey.fromString("test", ExampleMod.getPlugin()), shapelessRecipe);
 
-        //Bukkit.addRecipe(recipe);
+        CustomFurnaceRecipe furnaceRecipe = new CustomFurnaceRecipe(ItemInit.EXAMPLE_EATING, new CustomIngredient(ItemInit.EXAMPLE_ITEM), 20);
+        RecipeAPI.addRecipe(NamespacedKey.fromString("test_furnace", ExampleMod.getPlugin()), furnaceRecipe);
     }
 }

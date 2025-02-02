@@ -4,6 +4,7 @@ import de.cjdev.examplemod.ExampleMod;
 import de.cjdev.examplemod.item.ExampleCustom;
 import de.cjdev.papermodapi.api.item.CustomItem;
 import de.cjdev.papermodapi.api.item.CustomItems;
+import de.cjdev.recipeapi.api.component.RecipeComponents;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.FoodProperties;
 import io.papermc.paper.datacomponent.item.Tool;
@@ -26,7 +27,9 @@ public class ItemInit {
     public static void load(){
         EXAMPLE_ITEM = register("example_item");
         EXAMPLE_TOOL = register("example_tool", new CustomItem.Settings().maxDamage(69).component(DataComponentTypes.TOOL, Tool.tool().build()));
-        EXAMPLE_FUEL = register("example_fuel", new CustomItem.Settings().baseMaterial(Material.COAL));
+
+        // The item can be any material, but it works best when using a real fuel as the base 'cause the Client does things differently then
+        EXAMPLE_FUEL = register("example_fuel", new CustomItem.Settings().baseMaterial(Material.COAL).maxDamage(20).component(RecipeComponents.FUEL_COMPONENT, 20).recipeRemainder(stack -> stack.setDurability((short) (stack.getDurability() + 1))));
         EXAMPLE_EATING = register("example_eating", new CustomItem.Settings().food(FoodProperties.food().nutrition(10).saturation(10).build()));
         EXAMPLE_CUSTOM = register("example_custom", ExampleCustom::new);
     }

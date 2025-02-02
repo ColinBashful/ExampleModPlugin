@@ -11,5 +11,8 @@ dependencies:
     PaperModAPI:
       load: BEFORE
       required: true
+    RecipeAPI:
+      load: BEFORE
+      required: true
     DynamicRP:
       required: true
