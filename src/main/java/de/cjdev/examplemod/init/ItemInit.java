@@ -29,7 +29,7 @@ public class ItemInit {
         EXAMPLE_TOOL = register("example_tool", new CustomItem.Settings().maxDamage(69).component(DataComponentTypes.TOOL, Tool.tool().build()));
 
         // The item can be any material, but it works best when using a real fuel as the base 'cause the Client does things differently then
-        EXAMPLE_FUEL = register("example_fuel", new CustomItem.Settings().baseMaterial(Material.COAL).maxDamage(20).component(RecipeComponents.FUEL_COMPONENT, 20).recipeRemainder(stack -> stack.setDurability((short) (stack.getDurability() + 1))));
+        EXAMPLE_FUEL = register("example_fuel", new CustomItem.Settings().baseMaterial(Material.COAL).maxDamage(20).component(RecipeComponents.FUEL, 20).recipeRemainder(stack -> stack.setDurability((short) (stack.getDurability() + 1))));
         EXAMPLE_EATING = register("example_eating", new CustomItem.Settings().food(FoodProperties.food().nutrition(10).saturation(10).build()));
         EXAMPLE_CUSTOM = register("example_custom", ExampleCustom::new);
     }
