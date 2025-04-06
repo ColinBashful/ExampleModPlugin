@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": "examplemod:example_item",
+  "result": {
+    "id": "examplemod:example_eating"
+  },
+  "cookingtime": 20
+}

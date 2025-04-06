@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "examplemod:example_fuel",
+    "examplemod:example_fuel",
+    "examplemod:example_fuel",
+    "minecraft:dirt",
+    "minecraft:dirt"
+  ],
+  "result": {
+    "id": "examplemod:example_custom"
+  }
+}

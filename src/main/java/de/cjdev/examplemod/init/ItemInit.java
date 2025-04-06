@@ -4,34 +4,41 @@ import de.cjdev.examplemod.ExampleMod;
 import de.cjdev.examplemod.item.ExampleCustom;
 import de.cjdev.papermodapi.api.item.CustomItem;
 import de.cjdev.papermodapi.api.item.CustomItems;
-import de.cjdev.recipeapi.api.component.RecipeComponents;
+import de.cjdev.recipeapi.api.item.RecipeItemSettings;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import io.papermc.paper.datacomponent.item.FoodProperties;
 import io.papermc.paper.datacomponent.item.Tool;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.meta.Damageable;
 
 import java.util.function.Function;
 
 public class ItemInit {
-    public static CustomItem EXAMPLE_ITEM;
-    public static CustomItem EXAMPLE_TOOL;
-    public static CustomItem EXAMPLE_FUEL;
-    public static CustomItem EXAMPLE_EATING;
-    public static CustomItem EXAMPLE_CUSTOM;
+    public static final CustomItem EXAMPLE_ITEM = register("example_item");
+    public static final CustomItem EXAMPLE_TOOL = register("example_tool", new CustomItem.Settings().maxDamage(69).component(DataComponentTypes.TOOL, Tool.tool().build()));
+    // The item can be any material, but it works best when using a real fuel as the base 'cause the Client does things differently then
+    public static final CustomItem EXAMPLE_FUEL = register("example_fuel", new RecipeItemSettings().fuel(20).baseMaterial(Material.COAL).maxDamage(20).recipeRemainder(stack -> {
+        if (stack.getItemMeta() instanceof Damageable damageable) {
+            int i = damageable.getDamage() + 1;
+            if (i >= damageable.getMaxDamage()) {
+                stack.subtract();
+                return;
+            }
+            damageable.setDamage(i);
+            stack.setItemMeta(damageable);
+        } else
+            stack.subtract();
+    }));
+    public static final CustomItem EXAMPLE_EATING = register("example_eating", new CustomItem.Settings().food(FoodProperties.food().nutrition(10).saturation(10).build()));
+    public static final CustomItem EXAMPLE_CUSTOM = register("example_custom", ExampleCustom::new);
 
     private static NamespacedKey createItemId(String id){
         return ExampleMod.key(id);
     }
 
     public static void load(){
-        EXAMPLE_ITEM = register("example_item");
-        EXAMPLE_TOOL = register("example_tool", new CustomItem.Settings().maxDamage(69).component(DataComponentTypes.TOOL, Tool.tool().build()));
-
-        // The item can be any material, but it works best when using a real fuel as the base 'cause the Client does things differently then
-        EXAMPLE_FUEL = register("example_fuel", new CustomItem.Settings().baseMaterial(Material.COAL).maxDamage(20).component(RecipeComponents.FUEL, 20).recipeRemainder(stack -> stack.setDurability((short) (stack.getDurability() + 1))));
-        EXAMPLE_EATING = register("example_eating", new CustomItem.Settings().food(FoodProperties.food().nutrition(10).saturation(10).build()));
-        EXAMPLE_CUSTOM = register("example_custom", ExampleCustom::new);
+        EXAMPLE_CUSTOM.getDefaultStack();
     }
 
     private static CustomItem register(String id, Function<CustomItem.Settings, CustomItem> factory, CustomItem.Settings settings){
