@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id("io.papermc.paperweight.userdev") version "2.0.0-beta.11"
+    id("io.papermc.paperweight.userdev") version "${paperweight_version}"
 }
 
 group = 'de.cjdev'
@@ -16,13 +16,14 @@ repositories {
         name = "sonatype"
         url = "https://oss.sonatype.org/content/groups/public/"
     }
+    maven { url = "https://api.modrinth.com/maven" }
 }
 
 dependencies {
-    paperweight.paperDevBundle("1.21.4-R0.1-SNAPSHOT")
-    compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
-    compileOnly files("C:/Minecraft Servers/Paper Plugin Test Server/plugins/PaperModAPI-${project.papermodapi_version}+${project.minecraft_version}.jar")
-    compileOnly files("C:/Minecraft Servers/Paper Plugin Test Server/plugins/RecipeAPI-${project.recipeapi_version}+${project.minecraft_version}.jar")
+    paperweight.paperDevBundle("${minecraft_version}-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:${minecraft_version}-R0.1-SNAPSHOT")
+    compileOnly "maven.modrinth:papermodapi:${papermodapi_version}+${minecraft_version}"
+    compileOnly files("C:/Minecraft Servers/Paper Plugin Test Server/plugins/RecipeAPI-${recipeapi_version}+${minecraft_version}.jar")
 }
 
 def targetJavaVersion = 21

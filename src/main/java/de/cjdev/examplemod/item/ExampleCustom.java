@@ -62,7 +62,7 @@ public class ExampleCustom extends CustomItem {
             return ActionResult.SUCCESS;
         }
 
-        world.spawn(context.getHitPos(), Firework.class);
+        world.spawn(context.getHitPos().toLocation(context.getWorld()), Firework.class);
         return ActionResult.SUCCESS;
     }
 
